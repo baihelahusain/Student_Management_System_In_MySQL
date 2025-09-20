@@ -1,0 +1,42 @@
+CREATE DATABASE IF NOT EXISTS student_db;
+USE student_db;
+
+-- students table
+CREATE TABLE IF NOT EXISTS students (
+  roll INT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  sub1 INT NOT NULL,
+  sub2 INT NOT NULL,
+  sub3 INT NOT NULL,
+  sub4 INT NOT NULL,
+  sub5 INT NOT NULL,
+  percentage FLOAT,
+  grade CHAR(1)
+);
+
+CREATE TABLE IF NOT EXISTS admins (
+  email VARCHAR(255) PRIMARY KEY,
+  password_hash VARCHAR(255) NOT NULL
+);
+
+-- insert demo admin (hashed using SHA2)
+INSERT INTO admins (email, password_hash)
+VALUES ('baihelahusain@gmail.com', SHA2('Bah$5000USD', 256))
+ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
+
+USE student_db;
+SELECT email, password_hash FROM admins;
+
+CREATE USER IF NOT EXISTS 'student_user'@'localhost' IDENTIFIED BY 'Student@1234';
+
+-- give that user privileges on the student_db
+GRANT ALL PRIVILEGES ON student_db.* TO 'student_user'@'localhost';
+
+FLUSH PRIVILEGES;
+
+INSERT INTO students (roll, name, sub1, sub2, sub3, sub4, sub5, percentage, grade)
+VALUES (1, 'Alice', 90, 85, 88, 92, 95, 90.0, 'A')
+ON DUPLICATE KEY UPDATE name=VALUES(name);
+
+use student_db;
+select * from students;
