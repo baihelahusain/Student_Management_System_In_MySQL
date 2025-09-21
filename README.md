@@ -76,6 +76,5 @@ FLUSH PRIVILEGES;
 -**sudo apt install libmysqlcppconn-dev -y**
 
 ## Clone The Repo
-**git clone https://github.com/<your-username>/student-result-management.git
-cd student-result-management**
+**git clone https://github.com/baihelahusain/Student_Management_System_In_MySQL.git**
 
