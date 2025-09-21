@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS admins (
 
 -- Insert Demo Admin
 INSERT INTO admins (email, password_hash)
-VALUES ('baihelahusain@gmail.com', SHA2('Bah$5000USD', 256))
+VALUES ('enter_your_email_id_here', SHA2('Password', 256))
 ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
 
 -- Create MySQL User for Application
@@ -76,6 +76,6 @@ FLUSH PRIVILEGES;
 -**sudo apt install libmysqlcppconn-dev -y**
 
 ## Clone The Repo
--**git clone https://github.com/<your-username>/student-result-management.git
+**git clone https://github.com/<your-username>/student-result-management.git
 cd student-result-management**
 
