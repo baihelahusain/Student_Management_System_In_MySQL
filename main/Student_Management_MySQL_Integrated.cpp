@@ -5,16 +5,16 @@
 #include <mysql/mysql.h>
 using namespace std;
 
-// ✅ MySQL connection parameters
+// MySQL connection setup
 const char* HOST = "localhost";
 const char* USER = "student_user";
 const char* PASS = "Student@1234";
 const char* DB   = "student_db";
 
-// ✅ MySQL connection object
+// MySQL connection object
 MYSQL* conn;
 
-// ✅ Function to connect to DB
+// Function to connect to DB
 bool connectDB() {
     conn = mysql_init(NULL);
     if (!conn) {
@@ -29,7 +29,7 @@ bool connectDB() {
     return true;
 }
 
-// ✅ Secure Admin Login
+// Secure Admin Login
 bool adminLogin() {
     string email, password;
     cout << "Enter admin email: ";
@@ -51,13 +51,13 @@ bool adminLogin() {
     bool success = (mysql_num_rows(res) > 0);
     mysql_free_result(res);
 
-    if (success) cout << "✔ Admin Login Successful!\n";
-    else cout << "❌ Invalid credentials!\n";
+    if (success) cout << " Admin Login Successful!\n";
+    else cout << " Invalid credentials!\n";
 
     return success;
 }
 
-// ✅ Add Student
+// Add Student
 void addStudent() {
     int roll, sub1, sub2, sub3, sub4, sub5;
     string name;
@@ -85,11 +85,11 @@ void addStudent() {
     if (mysql_query(conn, query.c_str())) {
         cerr << "Insert Error: " << mysql_error(conn) << endl;
     } else {
-        cout << "✔ Student record added/updated!\n";
+        cout << "Student record added/updated!\n";
     }
 }
 
-// ✅ Display All Students
+//  Display All Students
 void displayAll() {
     if (mysql_query(conn, "SELECT * FROM students")) {
         cerr << "Select Error: " << mysql_error(conn) << endl;
@@ -110,7 +110,7 @@ void displayAll() {
     mysql_free_result(res);
 }
 
-// ✅ Search Student
+// Search Student
 void searchStudent() {
     int roll;
     cout << "Enter Roll No: "; cin >> roll;
@@ -132,12 +132,12 @@ void searchStudent() {
              << "  " << setw(3) << row[6] << "  " << setw(6) << row[7]
              << "  " << setw(2) << row[8] << endl;
     } else {
-        cout << "❌ Student not found!\n";
+        cout << "Student not found!\n";
     }
     mysql_free_result(res);
 }
 
-// ✅ Delete Student
+// Delete Student
 void deleteStudent() {
     int roll;
     cout << "Enter Roll No to delete: "; cin >> roll;
@@ -150,7 +150,7 @@ void deleteStudent() {
     }
 }
 
-// ✅ Admin Menu
+// Admin Menu
 void adminMenu() {
     int choice;
     do {
@@ -168,7 +168,7 @@ void adminMenu() {
     } while (choice != 5);
 }
 
-// ✅ Student Menu
+// Student Menu
 void studentMenu() {
     int roll;
     cout << "Enter your Roll No: ";
@@ -189,12 +189,12 @@ void studentMenu() {
         cout << setw(4) << row[0] << "  " << setw(12) << row[1]
              << "  " << setw(6) << row[7] << "  " << setw(2) << row[8] << endl;
     } else {
-        cout << "❌ Record not found!\n";
+        cout << "Record not found!\n";
     }
     mysql_free_result(res);
 }
 
-// ✅ Main
+// Main
 int main() {
     if (!connectDB()) return 1;
 
